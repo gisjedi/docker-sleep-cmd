@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import logging
-import os
+import signal
 import subprocess
 import sys
 import time
@@ -27,17 +27,18 @@ exited = False
 try:
     while True:
         running = True
-		
+
         logger.debug('Launching command...')
         subprocess.call(sys.argv[2:])
         logger.debug('Command completed.')
-		
+
         running = False
         if exited:
             break
         time.sleep(sleep_time)
 except Exception, ex:
-	logger.exception(ex)
+    logger.exception(ex)
+
 
 def on_signal(self, signum, _frame):
     '''See signal callback registration: :py:func:`signal.signal`.
