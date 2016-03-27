@@ -1,10 +1,7 @@
-FROM python:2-alpine
+FROM python:2-onbuild
 
-RUN apk update && apk add libtorrent && pip install feedparser
+ENV SLEEP_SECONDS 5
 
-COPY sleep-cmd.py /
-COPY rss-torrent.py /
-
-ENTRYPOINT ["/sleep-cmd.py"]
+ENTRYPOINT ["/usr/src/app/sleep_cmd.py"]
 # First parameter is seconds to sleep between runs
-CMD ["5", "echo", "Running..."]
+CMD ["echo", "Running..."]
